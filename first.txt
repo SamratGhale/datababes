@@ -1,0 +1,47 @@
+1.student
+    student_id (Primary key)
+    first_name
+    last_name
+    address
+    email
+    course_id
+    contact
+
+2.teacher
+    teacher_id (Primary key)
+    first_name
+    last_name
+    address
+    email
+    course_id
+    contact
+
+3.staff
+    first_name(Primary key)
+    last_name
+    address
+    email
+    job_type
+    contact
+
+4.course
+    course_id(Primary key)
+    name
+    description
+    start_date
+    subjects_ids
+    end_date
+    price
+
+5.teacher_course
+    teacher_id (foreign_key)
+    course_id (foreign_key)
+
+6.student_course
+    student_id (foreign_key)
+    course_id (foreign_key)
+    
+7.subjects
+    subjects_id
+    name
+    description

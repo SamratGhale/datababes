@@ -1,0 +1,116 @@
+UNF:
+Person -(person_id, name, age, DOB, sex, mobile_number, email_id, country,provience,city,street,house_number, address's phone_numbers, address's_fax_numbers, 
+course_id, course_name,course_price, course_type,specificaton_id,specificaton_name,leader_id, accomodation_id,accomodation_type,accomodation_location ,
+{email,email_id},
+{module_id,module_name},
+{TA_id,TA_name,status,ex},
+{clas_id,class_name,class_capacity,class_type},
+{meal_id,meal_type,meal_price},
+{scholarship_id, scholarship_type, scholarship_price},
+{eca_id, eca_type,grade_id}
+
+1NF
+
+->Person1 (person_id(PK),first_name,last_name,age,DOB,sex, mobile_number, country,provience,city,
+street,house_number, address's phone_numbers, address's_fax_numbers)
+
+->Student_info1 (student_id(PK), person_id(FK),meal_id,accomodation_id,accomodation_type,accomodation_price,accomodation_location,
+meal_id,scholarship_id,eca_id,course_id, course_name,course_price, course_type,specificaton_id,specificaton_name,leader_id,leader_name,leader_salary,module_grade)
+
+->Module_info1 (module_id, module_name)
+
+->Email_info1 (email_id, email, person_id)
+
+->instructor_info1 (instructor_id(PK),person_id(FK),course_id{FK},exp_year,salary)
+
+->Meal_info1 (meal_id,meal_type,meal_price)
+
+->scholarship_info1(scholarship_id, scholarship_type, scholarship_price)
+
+->ECA_info1 (eca_id, eca_type,eca_grade)
+
+2NF
+
+partial dependency
+the salary of instructor depends upon the module they teach,
+the status of instructor depends upon the module they teach
+the price of scholarship depends on the student_id
+the eca grades depends upon the student_id
+module_grade depends upon module_id and student_id
+
+tables:
+Person2 (person_id(PK),first_name,last_name,age,DOB,sex, mobile_number, country,provience,city, street,house_number, address's phone_numbers, address's_fax_numbers, 
+
+Student_info1 (student_id(PK), person_id(FK),meal_id,accomodation_id,accomodation_type,accomodation_price,accomodation_location,
+  meal_id,scholarship_id,eca_id,course_id, course_name,course_price, course_type,specificaton_id,specificaton_name,leader_id,leader_name,leader_salary)
+
+Module_info2 (module_id(PK), module_name)
+
+Email_info2 (email_id(FK), email, person_id(FK))
+
+instructor_info2 (instructor_id(PK),person_id(FK),exp_year)
+
+Meal_info2 (meal_id(PK),meal_type,meal_price)
+
+scholarship_info2(scholarship_id(PK), scholarship_type)
+
+ECA_info2 (eca_id(PK), eca_type)
+
+student-scholarship2 (scholarship_id(FK), student_id(FK), scholarship_price)
+
+student-eca2 (eca_id(FK), student_id(FK), eca_grade)
+
+student-meal2 (meal_id(FK), student_id(FK))
+
+module-instructor2 (instructor_id(Fk),module_id(FK), salary, status)
+
+module-specificaton2 (specificaton_id(FK), module_id(FK))
+
+course_instructor2 (course_id(FK), instructor_id(FK))
+
+module_marks2 (module_id(FK),student_id(FK),grade)
+
+
+3NF
+trasatice dependency
+course_name, course_price, course_type,leader_id,leader_name,leader_salary depends upon course_id which depends upon student_id
+country,provience,city,street,house_number, address's phone_numbers, address's_fax_numbers depends upon address_id which depends upon person_id
+accomodation_type,accomodation_price,accomodation_location depends upon accomodation_id which depends upon student_id
+specificaton_name is dependent on specificaton_id which is dependent upon course_id 
+
+->Person3 (person_id(PK),first_name,last_name,age,DOB,sex, mobile_number, address_id)
+
+->Student_info3 (student_id(PK), person_id(FK),accomodation_id,meal_id,scholarship_id,eca_id,course_id)
+
+->spcificaton3 (specificaton_id(PK),specificaton_name,course_id) 
+
+->course3 (course_id(PK), course_name, course_price, course_type,leader_id)
+
+->Address3 (address_id(PK),country,provience,city,street,house_number, address's phone_numbers, address's_fax_numbers)
+
+->Acomodation3  (accomodation_id(PK), accomodation_type,accomodation_price,accomodation_location)
+
+->Module_info3 (module_id(PK), module_name)
+
+->Email_info3 (email_id(FK), email, person_id(FK))
+
+->instructor_info3 (instructor_id(PK),person_id(FK),exp_year)
+
+->Meal_info3 (meal_id(PK),meal_type,meal_price)
+
+->scholarship_info3(scholarship_id(PK), scholarship_type)
+
+->ECA_info3 (eca_id(PK), eca_type)
+
+->student-scholarship3 (scholarship_id(FK), student_id(FK), scholarship_price)
+
+->student-eca3 (eca_id(FK), student_id(FK), eca_grade)
+
+->student-meal3 (meal_id(FK), student_id(FK))
+
+->module-instructor3 (instructor_id(Fk),module_id(FK), salary, instructor_status)
+
+->module-specificaton3 (specificaton_id(FK), module_id(FK))
+
+->module_marks3 (module_id(FK),student_id(FK),grade)
+
